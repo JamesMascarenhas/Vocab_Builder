@@ -7,13 +7,33 @@
   let tooltip = null;
   let currentToken = 0;
   let currentWord = '';
+  let pendingWord = '';
+  let selectionTimeout = null;
+  let autoCloseTimeout = null;
+
+  const clearAutoClose = () => {
+    if (autoCloseTimeout) {
+      clearTimeout(autoCloseTimeout);
+      autoCloseTimeout = null;
+    }
+  };
 
   const closeTooltip = () => {
     if (tooltip?.parentNode) {
       tooltip.parentNode.removeChild(tooltip);
     }
+    clearAutoClose();
     tooltip = null;
     currentWord = '';
+  };
+
+  const scheduleAutoClose = (token) => {
+    clearAutoClose();
+    autoCloseTimeout = setTimeout(() => {
+      if (tooltip && token === currentToken) {
+        closeTooltip();
+      }
+    }, 1400);
   };
 
   const isValidWord = (text) => {
@@ -87,9 +107,11 @@
         if (response?.status === 'ok') {
           updateAddButtonState(addButton, 'added');
           addButton.disabled = true;
+          scheduleAutoClose(token);
         } else if (response?.status === 'duplicate') {
           updateAddButtonState(addButton, 'duplicate');
           addButton.disabled = true;
+          scheduleAutoClose(token);
         } else {
           updateAddButtonState(addButton, 'failed');
           addButton.disabled = false;
@@ -173,12 +195,22 @@
   const handleSelectionChange = () => {
     const selection = window.getSelection();
     if (!selection || selection.isCollapsed) {
+      pendingWord = '';
+      if (selectionTimeout) {
+        clearTimeout(selectionTimeout);
+        selectionTimeout = null;
+      }
       closeTooltip();
       return;
     }
 
     const text = selection.toString();
     if (!isValidWord(text)) {
+      pendingWord = '';
+      if (selectionTimeout) {
+        clearTimeout(selectionTimeout);
+        selectionTimeout = null;
+      }
       closeTooltip();
       return;
     }
@@ -187,10 +219,35 @@
       return;
     }
 
-    currentWord = text;
-    const token = ++currentToken;
-    closeTooltip();
-    fetchDefinition(text, token);
+    pendingWord = text;
+
+    if (selectionTimeout) {
+      clearTimeout(selectionTimeout);
+    }
+
+    selectionTimeout = setTimeout(() => {
+      selectionTimeout = null;
+      const activeSelection = window.getSelection();
+      if (!activeSelection || activeSelection.isCollapsed) {
+        closeTooltip();
+        return;
+      }
+
+      const selectedText = activeSelection.toString();
+      if (selectedText !== pendingWord || !isValidWord(selectedText)) {
+        closeTooltip();
+        return;
+      }
+
+      if (selectedText === currentWord && tooltip) {
+        return;
+      }
+
+      currentWord = selectedText;
+      const token = ++currentToken;
+      closeTooltip();
+      fetchDefinition(selectedText, token);
+    }, 1000);
   };
 
   const handleKeydown = (event) => {
