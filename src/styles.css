@@ -1,16 +1,17 @@
 .vocab-tooltip {
   position: fixed;
-  top: 12px;
-  left: 12px;
-  max-width: min(320px, 90vw);
-  background: #0f172a;
-  color: #f8fafc;
-  border-radius: 8px;
-  padding: 12px 12px 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  top: 16px;
+  left: 16px;
+  max-width: min(340px, 92vw);
+  width: 320px;
+  background: #ffffff;
+  color: #1f2937;
+  border-radius: 12px;
+  padding: 14px 16px 16px;
+  box-shadow: 0 12px 32px rgba(18, 38, 63, 0.18);
+  font-family: "Inter", "Helvetica", Arial, sans-serif;
   font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.55;
   z-index: 2147483647;
   box-sizing: border-box;
 }
@@ -32,35 +33,38 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 6px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .vocab-tooltip__word {
   font-weight: 700;
-  font-size: 15px;
-  color: #e2e8f0;
+  font-size: 18px;
+  color: #0f172a;
   word-break: break-word;
 }
 
 .vocab-tooltip__close {
-  background: transparent;
+  background: none;
   border: none;
-  color: #cbd5e1;
+  color: #94a3b8;
   font-size: 18px;
   line-height: 1;
   cursor: pointer;
-  padding: 2px 6px;
-  border-radius: 4px;
+  padding: 4px;
+  border-radius: 6px;
 }
 
 .vocab-tooltip__close:hover {
-  background: rgba(255, 255, 255, 0.08);
+  color: #475569;
+  background: #f1f5f9;
 }
 
 .vocab-tooltip__definition {
-  color: #cbd5e1;
-  margin: 0 0 10px;
+  color: #475569;
+  margin: 0 0 14px;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .vocab-tooltip__actions {
@@ -69,20 +73,34 @@
 }
 
 .vocab-tooltip__add {
-  background: #22c55e;
+  background: linear-gradient(135deg, #5e72e4, #5164da);
   border: none;
-  color: #0b1727;
+  color: #ffffff;
   font-weight: 700;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 10px 16px;
+  border-radius: 10px;
   cursor: pointer;
-  min-width: 88px;
+  min-width: 104px;
   text-align: center;
+  box-shadow: 0 6px 18px rgba(94, 114, 228, 0.35);
+  transition: transform 0.05s ease, box-shadow 0.12s ease, filter 0.12s ease;
 }
 
 .vocab-tooltip__add:disabled {
-  opacity: 0.7;
+  opacity: 0.65;
   cursor: default;
+}
+
+.vocab-tooltip__add:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(94, 114, 228, 0.4);
+  filter: brightness(1.02);
+}
+
+.vocab-tooltip__add:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(94, 114, 228, 0.28);
+  filter: brightness(0.98);
 }
 
 .vocab-tooltip__add.is-failed {
@@ -91,16 +109,16 @@
 }
 
 .vocab-tooltip__add.is-duplicate {
-  background: #facc15;
+  background: #f59e0b;
   color: #0f172a;
 }
 
 .vocab-tooltip__add.is-added {
-  background: #38bdf8;
+  background: #22c55e;
   color: #0f172a;
 }
 
 .vocab-tooltip__status {
   font-size: 13px;
-  color: #cbd5e1;
+  color: #64748b;
 }
