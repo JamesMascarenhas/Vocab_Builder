@@ -1,5 +1,5 @@
 <h1 style="display: flex; align-items: center; gap: 16px;">
-  <img src="icon.png" alt="Vocab Builder Icon" width="128" />
+  <img src="icon.png" alt="Vocab Builder Icon" width="80" />
   <span>Vocab Builder</span>
 </h1>
 
