@@ -1,5 +1,9 @@
 # Vocab Builder
 
+<p align="center">
+  <img src="icon.png" alt="Vocab Builder Icon" width="120" />
+</p>
+
 Vocab Builder is a **minimal, distraction-free Chrome extension** that lets you select a single word on any webpage and add it directly to **Anki** with one click.
 
 It is designed for **high-frequency reading and studying**: no popups, no toolbar UI, no settings, and no clutter. Highlight a word, wait a moment, and add it to your vocabulary deck.
@@ -13,6 +17,36 @@ It is designed for **high-frequency reading and studying**: no popups, no toolba
 - Shows a small tooltip in the **top-left corner** of the page
 - Adds the word and definition to Anki via **AnkiConnect**
 - Automatically prevents duplicate cards (**case-insensitive**)
+
+---
+
+## Usage Examples
+
+### 1. Selecting a Word
+After selecting a single English word and holding the selection steady for ~1 second, the tooltip appears with the word, its definition, and an action button.
+
+<img src="docs/example_one.png" alt="Default tooltip UI" />
+
+---
+
+### 2. Successfully Added
+When the card is successfully added to Anki, the button updates to **Added** and the tooltip closes automatically.
+
+<img src="docs/example_two.png" alt="Added state" />
+
+---
+
+### 3. Duplicate Card
+If the word already exists in your Anki deck, the button shows **Duplicate** and the tooltip closes.
+
+<img src="docs/example_three.png" alt="Duplicate state" />
+
+---
+
+### 4. Failed (Anki Not Open)
+If Anki is not running or AnkiConnect is unreachable, the button shows **Failed**.
+
+<img src="docs/example_four.png" alt="Failed state" />
 
 ---
 
@@ -149,9 +183,9 @@ The goal is to support **flow-state reading and studying** without interruptions
 - Definitions depend on availability from dictionaryapi.dev
 - Words with no available definition close silently
 
-
 ---
 
 ## License
 
 MIT License
+
