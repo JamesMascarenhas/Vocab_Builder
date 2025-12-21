@@ -1,6 +1,6 @@
-<h1>
-  <img src="icon.png" alt="Vocab Builder Icon" width="48" style="vertical-align: middle; margin-right: 12px;" />
-  Vocab Builder
+<h1 style="display: flex; align-items: center; gap: 16px;">
+  <img src="icon.png" alt="Vocab Builder Icon" width="64" />
+  <span>Vocab Builder</span>
 </h1>
 
 
